@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-// --- FIX PART 1: Imported the 'Users' icon ---
-import { LayoutDashboard, Settings, ChevronDown, Users } from 'lucide-react';
+// --- FIX 1: Imported the 'Vote' icon for the new Elections section ---
+import { LayoutDashboard, Settings, ChevronDown, Users, Smile, Vote } from 'lucide-react';
 
-// --- FIX PART 2: Added the 'Users' section to the navigation array ---
+// --- FIX 2: Added the 'Elections' section to the navigation array ---
 const navItems = [
   { 
     label: 'Dashboard', 
@@ -18,13 +18,31 @@ const navItems = [
       { label: 'Website Settings', href: '/settings/website' },
     ],
   },
-  // --- NEW SECTION ADDED HERE ---
   {
     label: 'Users',
-    icon: Users, // Using the imported Users icon
-    basePath: '/users', // The parent path for all user-related pages
+    icon: Users,
+    basePath: '/users',
     subItems: [
-      { label: 'All Users', href: '/allusers' }, // Link to the AllUsers page
+      { label: 'All Users', href: '/allusers' },
+    ]
+  },
+  {
+    label: 'Emoji',
+    icon: Smile,
+    basePath: '/emoji',
+    subItems: [
+      { label: 'Add Emoji', href: '/addemoji' },
+      { label: 'All Emoji', href: '/allemoji' },
+    ]
+  },
+  // --- NEW ELECTIONS SECTION ADDED HERE ---
+  {
+    label: 'Elections',
+    icon: Vote, // Using the new Vote icon
+    basePath: '/election', // A logical base path for grouping
+    subItems: [
+      { label: 'Add Election', href: '/addelection' }, // Path matches your App.jsx
+      { label: 'All Elections', href: '/allelection' }, // Path matches your App.jsx
     ]
   }
 ];
@@ -37,7 +55,8 @@ const Sidebar = ({ isOpen, setOpen }) => {
   useEffect(() => {
     const newOpenSections = {};
     navItems.forEach(item => {
-      if (item.subItems && location.pathname.startsWith(item.basePath)) {
+      const isChildActive = item.subItems?.some(sub => location.pathname === sub.href);
+      if (isChildActive) {
         newOpenSections[item.label] = true;
       }
     });
@@ -63,21 +82,31 @@ const Sidebar = ({ isOpen, setOpen }) => {
       <aside className={`fixed top-0 left-0 z-50 h-screen w-64 border-r bg-white shadow-lg transition-transform duration-300 ease-in-out lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="flex h-full flex-col bg-white">
           <div className="p-4 border-b">
-            <img src="./src/Pages/admin_logo.png" alt="Vision Data Logo" className="h-10 w-auto" />
+            {/* Using the provided logo path */}
+            <img src="/src/Pages/admin_logo.png" alt="Vision Data Logo" className="h-10 w-auto" />
           </div>
-          {/* The rest of the rendering logic remains unchanged as it's data-driven */}
           <nav className="flex-1 px-3 py-4">
             <ul className="space-y-2">
               {navItems.map((item) => (
                 <li key={item.label}>
                   {!item.subItems ? (
+                    // Top-level link (e.g., Dashboard)
                     <NavLink to={item.href} className={({ isActive }) => `flex items-center rounded-lg px-4 py-3 text-base font-medium transition-colors ${isActive ? 'bg-blue-600 text-white' : 'text-gray-600 hover:bg-gray-100'}`}>
                       <item.icon className="h-5 w-5 mr-3" />
                       {item.label}
                     </NavLink>
                   ) : (
+                    // Accordion Section (e.g., General Settings, Users, Emoji)
                     <div>
-                      <button onClick={() => toggleSection(item.label)} className={`flex w-full items-center justify-between rounded-lg px-4 py-3 text-base font-medium transition-colors ${location.pathname.startsWith(item.basePath) ? 'bg-gray-200 text-gray-900' : 'text-gray-600 hover:bg-gray-100'}`}>
+                      <button 
+                        onClick={() => toggleSection(item.label)} 
+                        className={`flex w-full items-center justify-between rounded-lg px-4 py-3 text-base font-medium transition-colors ${
+                          // Check if any sub-item is active to highlight the parent
+                          item.subItems.some(sub => location.pathname === sub.href) 
+                            ? 'bg-gray-200 text-gray-900' 
+                            : 'text-gray-600 hover:bg-gray-100'
+                        }`}
+                      >
                         <div className="flex items-center">
                           <item.icon className="h-5 w-5 mr-3" />
                           {item.label}
@@ -88,7 +117,8 @@ const Sidebar = ({ isOpen, setOpen }) => {
                         <ul className="pt-2 pl-5">
                           {item.subItems.map((subItem) => (
                             <li key={subItem.label}>
-                              <NavLink to={subItem.href} className={({ isActive }) => `flex items-center rounded-lg w-full px-4 py-3 text-base font-medium transition-colors ${isActive ? 'bg-gray-200 text-gray-900' : 'text-gray-600 hover:bg-gray-100'}`}>
+                              {/* Sub-item link */}
+                              <NavLink to={subItem.href} className={({ isActive }) => `flex items-center rounded-lg w-full px-4 py-3 text-sm font-medium transition-colors ${isActive ? 'bg-gray-200 text-gray-900' : 'text-gray-600 hover:bg-gray-100'}`}>
                                 {subItem.label}
                               </NavLink>
                             </li>

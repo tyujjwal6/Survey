@@ -82,3 +82,24 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ================================================================== */
+/* Custom styles for the React-Quill editor to match the design */
+/* ================================================================== */
+.quill-editor-container .ql-toolbar {
+    border-top-left-radius: 0.375rem; /* 6px */
+    border-top-right-radius: 0.375rem; /* 6px */
+    border-color: #d1d5db; /* gray-300 */
+}
+
+.quill-editor-container .ql-container {
+    border-bottom-left-radius: 0.375rem; /* 6px */
+    border-bottom-right-radius: 0.375rem; /* 6px */
+    border-color: #d1d5db; /* gray-300 */
+    min-height: 250px; /* Set a minimum height */
+    font-size: 0.875rem; /* text-sm */
+}
+
+.quill-editor-container .ql-editor {
+    min-height: 250px;
+}

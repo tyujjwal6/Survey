@@ -12,6 +12,10 @@ import ForgotPasswordPage from './Pages/ForgotPasswordPage';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import WebsiteSettings from './Pages/GeneralSettings/WebsiteSettings';
 import AllUsers from './Pages/Users/AllUsers';
+import AddEmoji from './Pages/Emoji/AddEmoji';
+import AllEmoji from './Pages/Emoji/AllEmoji';
+import AddElection from './Pages/Elections/AddElection';
+import AllElections from './Pages/Elections/AllElections';
 
 const App = () => {
   return (
@@ -32,6 +36,10 @@ const App = () => {
                 <Route path="/dashboard" element={<Dashboard />} />
 
                 <Route path="/allusers" element={<AllUsers />} />
+                <Route path="/addemoji" element={<AddEmoji />} />
+                <Route path="/allemoji" element={<AllEmoji />} />
+                <Route path="/addelection" element={<AddElection />} />
+                <Route path="/allelection" element={<AllElections />} />
 
                 {/* IMPORTANT: Use the path that your Sidebar expects for active styling */}
                 <Route path="/settings/website" element={<WebsiteSettings />} />
