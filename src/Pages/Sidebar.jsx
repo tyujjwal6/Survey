@@ -63,7 +63,7 @@ const Sidebar = ({ isOpen, setOpen }) => {
       <aside className={`fixed top-0 left-0 z-50 h-screen w-64 border-r bg-white shadow-lg transition-transform duration-300 ease-in-out lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="flex h-full flex-col bg-white">
           <div className="p-4 border-b">
-            <img src="https://i.imgur.com/As8d6hA.png" alt="Vision Data Logo" className="h-10 w-auto" />
+            <img src="./src/Pages/admin_logo.png" alt="Vision Data Logo" className="h-10 w-auto" />
           </div>
           {/* The rest of the rendering logic remains unchanged as it's data-driven */}
           <nav className="flex-1 px-3 py-4">
