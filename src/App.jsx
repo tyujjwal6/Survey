@@ -1,24 +1,47 @@
-import React from 'react';
-// Correctly import what you need from react-router-dom
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// src/App.jsx
 
-// Import your page components
-// I'm assuming you've created a 'Pages' folder for them
+import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+
+// Import your new layout
+import AppLayout from './Pages/AppLayout';
+
+// Import your page components using your specified paths
 import LoginPage from './Pages/LoginPage';
 import ForgotPasswordPage from './Pages/ForgotPasswordPage';
 import Dashboard from './Pages/Dashboard/Dashboard';
+import WebsiteSettings from './Pages/GeneralSettings/WebsiteSettings';
+import AllUsers from './Pages/Users/AllUsers';
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
+        {/* --- Public Routes (No Layout) --- */}
+        <Route path="/" element={<Navigate to="/login" />} /> {/* Redirect root to login */}
         <Route path="/login" element={<LoginPage />} />
-
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
 
+        {/* --- Main App Routes (Wrapped in AppLayout) --- */}
+        <Route 
+          path="/*" 
+          element={
+            <AppLayout>
+              <Routes>
+                {/* Define all your layout-based pages here */}
+                <Route path="/dashboard" element={<Dashboard />} />
 
+                <Route path="/allusers" element={<AllUsers />} />
+
+                {/* IMPORTANT: Use the path that your Sidebar expects for active styling */}
+                <Route path="/settings/website" element={<WebsiteSettings />} />
+
+                {/* A catch-all to redirect any unknown path within the app to the dashboard */}
+                <Route path="*" element={<Navigate to="/dashboard" />} />
+              </Routes>
+            </AppLayout>
+          } 
+        />
       </Routes>
     </BrowserRouter>
   );
