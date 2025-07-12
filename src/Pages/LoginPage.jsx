@@ -16,6 +16,8 @@ const LoginPage = () => {
     rememberMe: false,
   });
   const [isLoading, setIsLoading] = useState(false);
+  
+  // useNavigate hook is already correctly initialized
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -33,6 +35,7 @@ const LoginPage = () => {
     console.log('Logging in with:', formData);
 
     try {
+      // Simulating an API call
       await new Promise(resolve => setTimeout(resolve, 1000));
       const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
         method: 'POST',
@@ -41,9 +44,17 @@ const LoginPage = () => {
       });
       
       if (response.ok) {
-        alert('Login successful!');
-        // navigate('/dashboard'); 
+        // Login is successful
+        // You can remove the alert or keep it for testing
+        alert('Login successful! Redirecting to dashboard...');
+        
+        // ===============================================
+        //  THIS IS THE CHANGE: Navigate to the dashboard
+        // ===============================================
+        navigate('/dashboard'); 
+        
       } else {
+        // Handle failed login
         alert('Login failed. Please check your credentials.');
       }
     } catch (error) {
@@ -114,10 +125,10 @@ const LoginPage = () => {
               </div>
               <Button 
                 type="submit" 
-                className="bg-[#3b82f6] hover:bg-[#2563eb] text-white rounded-md px-3 py-2 h-9 text-sm"
+                className="bg-[#3b82f6] hover:bg-[#2563eb] text-white rounded-md px-3 py-2 h-9 text-sm flex items-center space-x-2"
                 disabled={isLoading}
               >
-                {isLoading ? "Please wait..." : <><ChevronRight className="h-4 w-4" /> Login to Dashboard</>}
+                {isLoading ? "Please wait..." : <><ChevronRight className="h-4 w-4" /> <span>Login</span></>}
               </Button>
             </div>
           </form>

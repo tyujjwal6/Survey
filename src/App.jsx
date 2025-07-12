@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // I'm assuming you've created a 'Pages' folder for them
 import LoginPage from './Pages/LoginPage';
 import ForgotPasswordPage from './Pages/ForgotPasswordPage';
+import Dashboard from './Pages/Dashboard/Dashboard';
 
 const App = () => {
   return (
@@ -15,7 +16,8 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
 
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        
+        <Route path="/dashboard" element={<Dashboard />} />
+
 
       </Routes>
     </BrowserRouter>
