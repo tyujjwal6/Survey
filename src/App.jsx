@@ -31,6 +31,8 @@ import AddNotification from './Pages/Notification/AddNotification';
 import AllNotifications from './Pages/Notification/AllNotifications';
 import AddDistricts from './Pages/Districts/AddDistricts';
 import AllDistricts from './Pages/Districts/AllDistricts';
+import AddLoksabha from './Pages/Loksabha/AddLoksabha';
+import AllLoksabha from './Pages/Loksabha/AllLoksabha';
 
 const App = () => {
   return (
@@ -70,6 +72,8 @@ const App = () => {
                 <Route path="/allnotifications" element={<AllNotifications />} />
                 <Route path="/adddistricts" element={<AddDistricts />} />
                 <Route path="/alldistricts" element={<AllDistricts />} />
+                <Route path="/addloksabha" element={<AddLoksabha />} />
+                <Route path="/allloksabha" element={<AllLoksabha />} />
 
 
                 {/* IMPORTANT: Use the path that your Sidebar expects for active styling */}

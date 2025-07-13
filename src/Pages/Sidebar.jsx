@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-// --- FIX 1: Imported the 'Landmark' icon for the Districts section ---
-import { LayoutDashboard, Settings, ChevronDown, Users, Smile, Vote, Database, FileText, Briefcase, MapPin, Blocks, User, Bell, Landmark } from 'lucide-react';
+// --- MODIFICATION: Imported the 'Building2' icon for Loksabha ---
+import { LayoutDashboard, Settings, ChevronDown, Users, Smile, Vote, Database, FileText, Briefcase, MapPin, Blocks, User, Bell, Landmark, Building2 } from 'lucide-react';
 
-// --- FIX 2: Added the 'Landmark' icon to the 'Districts' navigation item ---
 const navItems = [
   { 
     label: 'Dashboard', 
@@ -108,12 +107,22 @@ const navItems = [
   },
   {
     label: 'Districts',
-    icon: Landmark, // Added icon for Districts
+    icon: Landmark,
     basePath: '/districts',
     subItems: [
         { label: 'Add Districts', href: '/adddistricts' },
         { label: 'All Districts', href: '/alldistricts' },
     ]
+  },
+  {
+    label: 'Loksabha',
+    // --- MODIFICATION: Changed the icon from Landmark to Building2 ---
+    icon: Building2, 
+    basePath: '/loksabha',
+    subItems: [
+      { label: 'Add Loksabha', href: '/addloksabha' },
+      { label: 'All Loksabha', href: '/allloksabha' },
+    ],
   }
 ];
 
@@ -124,12 +133,13 @@ const Sidebar = ({ isOpen, setOpen }) => {
   useEffect(() => {
     const newOpenSections = {};
     navItems.forEach(item => {
-      const isChildActive = item.subItems?.some(sub => location.pathname === sub.href);
-      if (isChildActive) {
+      // Check if the current path is the base path or a child of the base path
+      const isBasePathActive = item.basePath && location.pathname.startsWith(item.basePath);
+      if (isBasePathActive) {
         newOpenSections[item.label] = true;
       }
     });
-    setOpenSections(newOpenSections);
+    setOpenSections(prevSections => ({ ...prevSections, ...newOpenSections }));
   }, [location.pathname]);
 
   useEffect(() => {
@@ -142,6 +152,15 @@ const Sidebar = ({ isOpen, setOpen }) => {
     setOpenSections(prev => ({ ...prev, [label]: !prev[label] }));
   };
 
+  const isLinkActive = (item) => {
+    if (item.subItems) {
+      // For parent items, check if the current path starts with its base path
+      return item.basePath && location.pathname.startsWith(item.basePath);
+    }
+    // For single items, check for an exact match
+    return location.pathname === item.href;
+  };
+  
   return (
     <>
       {isOpen && (
@@ -149,39 +168,53 @@ const Sidebar = ({ isOpen, setOpen }) => {
       )}
       <aside className={`fixed top-0 left-0 z-50 h-screen w-64 border-r bg-white shadow-lg transition-transform duration-300 ease-in-out lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="flex h-full flex-col bg-white">
-          <div className="p-4 border-b">
-            <img src="/src/Pages/admin_logo.png" alt="Vision Data Logo" className="h-10 w-auto" />
+          <div className="flex items-center justify-center p-4 border-b h-[65px]">
+            <img src="/src/Pages/admin_logo.png" alt="Vision Data Logo" className="h-auto w-full max-w-[180px]" />
           </div>
           <nav className="flex-1 px-3 py-4">
-            <ul className="space-y-2">
+            <ul className="space-y-1.5">
               {navItems.map((item) => (
                 <li key={item.label}>
                   {!item.subItems ? (
-                    <NavLink to={item.href} className={({ isActive }) => `flex items-center rounded-lg px-4 py-3 text-base font-medium transition-colors ${isActive ? 'bg-blue-600 text-white' : 'text-gray-600 hover:bg-gray-100'}`}>
-                      {item.icon && <item.icon className="h-5 w-5 mr-3" />}
-                      {item.label}
+                    <NavLink 
+                      to={item.href} 
+                      className={({ isActive }) => `flex items-center rounded-lg px-4 py-3 text-base font-medium transition-colors ${
+                        isActive 
+                        ? 'bg-blue-600 text-white' 
+                        : 'text-gray-600 hover:bg-gray-100'
+                      }`}
+                    >
+                      {item.icon && <item.icon className="h-5 w-5 mr-3 flex-shrink-0" />}
+                      <span>{item.label}</span>
                     </NavLink>
                   ) : (
                     <div>
                       <button 
                         onClick={() => toggleSection(item.label)} 
-                        className={`flex w-full items-center justify-between rounded-lg px-4 py-3 text-base font-medium transition-colors ${
-                          openSections[item.label] || item.subItems.some(sub => location.pathname === sub.href) 
+                        className={`flex w-full items-center justify-between rounded-lg px-4 py-3 text-base font-medium transition-colors text-left ${
+                          isLinkActive(item)
                             ? 'bg-gray-200 text-gray-900' 
                             : 'text-gray-600 hover:bg-gray-100'
                         }`}
                       >
                         <div className="flex items-center">
-                          {item.icon && <item.icon className="h-5 w-5 mr-3" />}
-                          {item.label}
+                          {item.icon && <item.icon className="h-5 w-5 mr-3 flex-shrink-0" />}
+                          <span>{item.label}</span>
                         </div>
                         <ChevronDown className={`h-5 w-5 transition-transform ${openSections[item.label] ? 'rotate-180' : ''}`} />
                       </button>
                       {openSections[item.label] && (
-                        <ul className="pt-2 pl-5">
+                        <ul className="pt-2 pl-6 space-y-1">
                           {item.subItems.map((subItem) => (
                             <li key={subItem.label}>
-                              <NavLink to={subItem.href} className={({ isActive }) => `flex items-center rounded-lg w-full px-4 py-3 text-sm font-medium transition-colors ${isActive ? 'text-gray-900 font-semibold' : 'text-gray-600 hover:bg-gray-100'}`}>
+                              <NavLink 
+                                to={subItem.href} 
+                                className={({ isActive }) => `flex items-center rounded-lg w-full px-4 py-2.5 text-sm font-medium transition-colors ${
+                                  isActive 
+                                    ? 'text-gray-900 font-semibold bg-gray-100' 
+                                    : 'text-gray-500 hover:text-gray-900 hover:bg-gray-100'
+                                }`}
+                              >
                                 {subItem.label}
                               </NavLink>
                             </li>
