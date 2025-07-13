@@ -42,7 +42,7 @@ const StatCard = ({ title, value, icon: Icon, iconBgClass, textColorClass }) => 
 );
 
 const AllZone = () => {
-    const navigate = useNavigate();
+    const navigate = useNavigate(); // Correctly initialized
     const [selectedRows, setSelectedRows] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [modalData, setModalData] = useState({ view: null, edit: null, delete: null });
@@ -65,9 +65,10 @@ const AllZone = () => {
         setModalData(prev => ({ ...prev, [type]: null }));
     };
 
+    // --- THIS IS THE CHANGE ---
+    // Update this function to navigate to the correct route
     const handleAddNew = () => {
-        // navigate('/add-zone'); // Example navigation
-        alert("Navigating to Add New Zone page...");
+        navigate('/addzone');
     };
     
     const confirmDelete = () => {

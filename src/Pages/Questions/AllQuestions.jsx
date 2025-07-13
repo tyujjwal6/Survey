@@ -50,7 +50,7 @@ const StatCard = ({ icon, title, value, colorClass }) => {
 };
 
 const AllQuestions = () => {
-    const navigate = useNavigate();
+    const navigate = useNavigate(); // Correctly initialized
     const [selectedRows, setSelectedRows] = useState([]);
     const [deleteModalData, setDeleteModalData] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
@@ -66,11 +66,10 @@ const AllQuestions = () => {
         );
     };
 
+    // --- THIS IS THE CHANGE ---
+    // Update this function to navigate to the correct route
     const handleAddNew = () => {
-        console.log("Navigating to Add New Question page...");
-        // This will navigate to the page you created earlier
-        // navigate('/add-question'); 
-        alert("Navigating to Add New page...");
+        navigate('/addquestions');
     };
 
     const handleEdit = (question) => {

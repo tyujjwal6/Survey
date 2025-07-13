@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom'; // 1. Import useNavigate
 
 // This single file contains the main component and mocks for UI/icons
 // to fulfill the request. In a real project, you would import these
@@ -88,6 +89,7 @@ const CustomSelect = ({ value, placeholder, options, onValueChange }) => {
 
 
 const AddLoksabha = () => {
+    const navigate = useNavigate(); // 2. Initialize the hook
     const initialFormData = {
         name: '',
         code: '',
@@ -127,10 +129,9 @@ const AddLoksabha = () => {
         console.log("Form has been reset!");
     };
 
+    // 3. Update the handleBack function
     const handleBack = () => {
-        // In a real app, you would use a router (e.g., react-router-dom)
-        console.log("Navigating back...");
-        alert("Action: Navigate Back to Loksabha list.");
+        navigate('/allloksabha');
     };
 
     const handleSubmit = async (e) => {

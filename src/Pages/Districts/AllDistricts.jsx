@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Already imported, which is great!
 import {
   Home, ChevronRight, FileText, CheckSquare, AlertTriangle, Eye, Pencil, X, Circle, MoreHorizontal, Plus, Trash2
 } from 'lucide-react';
@@ -42,7 +42,7 @@ const StatCard = ({ title, value, icon: Icon, iconBgClass, textColorClass }) => 
 );
 
 const AllDistricts = () => {
-    const navigate = useNavigate();
+    const navigate = useNavigate(); // This is correctly initialized
     const [selectedRows, setSelectedRows] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [modalData, setModalData] = useState({ view: null, edit: null, delete: null });
@@ -64,10 +64,11 @@ const AllDistricts = () => {
     const closeModal = (type) => {
         setModalData(prev => ({ ...prev, [type]: null }));
     };
-
+    
+    // --- THIS IS THE CHANGE ---
+    // Update this function to navigate to the correct route
     const handleAddNew = () => {
-        // navigate('/add-district'); // Example navigation
-        alert("Navigating to Add New District page...");
+        navigate('/adddistricts');
     };
     
     const confirmDelete = () => {

@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom'; // 1. Import useNavigate
 
 // --- Start of Mocked Icons (equivalent to lucide-react) ---
 const Home = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>;
@@ -59,6 +60,7 @@ const ConfirmationModal = ({ isOpen, onClose, onConfirm, title, message, recordN
 };
 
 const AllLoksabha = () => {
+    const navigate = useNavigate(); // 2. Initialize the hook
     const initialData = [
       { id: 99, name: 'Udalguri', code: 15, status: 'Active', updatedOn: '2025-06-23 18:18:39' },
       { id: 98, name: 'Darrang-Udalguri', code: 14, status: 'Active', updatedOn: '2025-06-23 18:16:09' },
@@ -93,8 +95,6 @@ const AllLoksabha = () => {
     };
 
     const handleAction = (action, record) => {
-      // In a real app, these would open modals or navigate.
-      // For this example, we'll use alerts and a confirmation modal for delete.
       if (action === 'delete') {
           setRecordToDelete(record);
           setDeleteModalOpen(true);
@@ -105,15 +105,11 @@ const AllLoksabha = () => {
 
     const handleDeleteConfirm = async () => {
         if (!recordToDelete) return;
-
         console.log(`Attempting to delete record with ID: ${recordToDelete.id}`);
-        
         try {
-            // Hitting a dummy API for deletion
             const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${recordToDelete.id}`, {
                 method: 'DELETE',
             });
-
             if (response.ok) {
                 console.log('Dummy API response: OK. Deleting from local state.');
                 setLoksabhaData(prev => prev.filter(item => item.id !== recordToDelete.id));
@@ -137,7 +133,6 @@ const AllLoksabha = () => {
           return;
       }
       alert(`Bulk Action: ${action} on ${selectedRows.length} record(s). IDs: ${selectedRows.join(', ')}`);
-      // You would implement the logic for bulk actions here.
     };
     
     return (
@@ -174,8 +169,10 @@ const AllLoksabha = () => {
                 <Card>
                     <CardHeader className="flex flex-wrap items-center justify-between gap-4">
                         <CardTitle>Loksabha (Total Record: {counts.total})</CardTitle>
-                        {/* This would navigate to the AddLoksabha page/modal */}
-                        <button onClick={() => alert('Opening Add New Loksabha modal/page...')} className="px-4 py-2 bg-[#EE4B4B] text-white text-sm font-medium rounded-md hover:bg-red-600 transition-colors">
+                        {/* 3. Update the onClick handler */}
+                        <button 
+                            onClick={() => navigate('/addloksabha')} 
+                            className="px-4 py-2 bg-[#EE4B4B] text-white text-sm font-medium rounded-md hover:bg-red-600 transition-colors">
                             Add New
                         </button>
                     </CardHeader>

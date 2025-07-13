@@ -59,11 +59,10 @@ const AddCandidates = () => {
         console.log("Form has been reset.");
     };
 
+    // --- THIS IS THE CHANGE ---
+    // Update this function to navigate to the "/allcandidates" route
     const handleBack = () => {
-        console.log("Navigating back...");
-        alert("Navigating back...");
-        // In a real app, you would use:
-        // navigate(-1); 
+        navigate('/allcandidates');
     };
 
     return (

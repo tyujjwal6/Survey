@@ -58,11 +58,10 @@ const AddOption = () => {
         console.log("Form has been reset.");
     };
 
+    // --- THIS IS THE CHANGE ---
+    // Update this function to navigate to the "/alloptions" route
     const handleBack = () => {
-        console.log("Navigating back...");
-        alert("Navigating back...");
-        // In a real app, you would use:
-        // navigate(-1); 
+        navigate('/alloptions');
     };
 
     return (

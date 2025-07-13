@@ -98,7 +98,13 @@ const AllEmoji = () => {
     
     // --- Modal and Action Handlers ---
     const closeModal = () => setModalState({ type: null, data: null });
-    const handleAdd = () => navigate('/add-emoji'); // Navigate to the Add Emoji page
+
+    // --- THIS IS THE CHANGE ---
+    // This function now navigates to the /addemoji route
+    const handleAdd = () => {
+        navigate('/addemoji');
+    };
+    
     const handleView = (emoji) => setModalState({ type: 'view', data: emoji });
     const handleEdit = (emoji) => setModalState({ type: 'edit', data: emoji });
     const handleDelete = (emoji) => setModalState({ type: 'delete', data: emoji });
@@ -108,11 +114,7 @@ const AllEmoji = () => {
         setIsLoading(true);
         const formData = new FormData(e.target);
         const dataObject = Object.fromEntries(formData.entries());
-        // For a real API, you'd create a new FormData and append fields
-        // const apiFormData = new FormData();
-        // apiFormData.append('title', dataObject.title);
-        // if (dataObject.emojiImage.size > 0) { apiFormData.append('emojiImage', dataObject.emojiImage); }
-
+        
         await apiHandler(action, dataObject);
         // Here you would update the state based on the API response
         setEmojis(prev => prev.map(em => (em.id === emoji.id ? { ...em, ...dataObject, emojiUrl: e.target.emojiImage.files[0] ? URL.createObjectURL(e.target.emojiImage.files[0]) : em.emojiUrl } : em)));

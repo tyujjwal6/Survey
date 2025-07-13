@@ -225,7 +225,11 @@ const AllElections = () => {
     
     // --- Modal and Action Handlers ---
     const closeModal = () => setModalState({ type: null, data: null });
-    const handleAdd = () => navigate('/add-election');
+    
+    // --- THIS IS THE CHANGE ---
+    // The handleAdd function now navigates to /addelection
+    const handleAdd = () => navigate('/addelection');
+    
     const handleView = (election) => setModalState({ type: 'view', data: election });
     const handleEdit = (election) => setModalState({ type: 'edit', data: { ...election } });
     const handleDelete = (election) => setModalState({ type: 'delete', data: election });
