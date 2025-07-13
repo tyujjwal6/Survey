@@ -32,6 +32,7 @@ const Header = ({ onMenuClick }) => {
 
   return (
     <header className="sticky top-0 z-30 w-full bg-white shadow-sm flex items-center justify-between h-16">
+      {/* Hamburger button - now works on all screen sizes */}
       <button
         onClick={onMenuClick}
         className="h-full w-16 flex items-center justify-center bg-[#EF4444] text-white hover:bg-[#DC2626] transition-colors"
@@ -52,9 +53,15 @@ const Header = ({ onMenuClick }) => {
         {isDropdownOpen && (
           <div className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-40">
             <div className="py-1">
-              <a href="#" className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"><User className="mr-3 h-4 w-4" />Profile</a>
-              <a href="#" className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"><Settings className="mr-3 h-4 w-4" />Settings</a>
-              <a href="/login" className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"><LogOut className="mr-3 h-4 w-4" />Logout</a>
+              <a href="#" className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <User className="mr-3 h-4 w-4" />Profile
+              </a>
+              <a href="#" className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <Settings className="mr-3 h-4 w-4" />Settings
+              </a>
+              <a href="/login" className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <LogOut className="mr-3 h-4 w-4" />Logout
+              </a>
             </div>
           </div>
         )}

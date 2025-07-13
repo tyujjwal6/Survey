@@ -1,8 +1,10 @@
+// src/components/Sidebar.jsx
+
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-// --- MODIFICATION: Imported the 'Building2' icon for Loksabha ---
 import { LayoutDashboard, Settings, ChevronDown, Users, Smile, Vote, Database, FileText, Briefcase, MapPin, Blocks, User, Bell, Landmark, Building2 } from 'lucide-react';
 
+// (navItems array remains the same)
 const navItems = [
   { 
     label: 'Dashboard', 
@@ -116,7 +118,6 @@ const navItems = [
   },
   {
     label: 'Loksabha',
-    // --- MODIFICATION: Changed the icon from Landmark to Building2 ---
     icon: Building2, 
     basePath: '/loksabha',
     subItems: [
@@ -126,6 +127,7 @@ const navItems = [
   }
 ];
 
+
 const Sidebar = ({ isOpen, setOpen }) => {
   const [openSections, setOpenSections] = useState({});
   const location = useLocation();
@@ -133,9 +135,7 @@ const Sidebar = ({ isOpen, setOpen }) => {
   useEffect(() => {
     const newOpenSections = {};
     navItems.forEach(item => {
-      // Check if the current path is the base path or a child of the base path
-      const isBasePathActive = item.basePath && location.pathname.startsWith(item.basePath);
-      if (isBasePathActive) {
+      if (item.basePath && location.pathname.startsWith(item.basePath)) {
         newOpenSections[item.label] = true;
       }
     });
@@ -154,10 +154,8 @@ const Sidebar = ({ isOpen, setOpen }) => {
 
   const isLinkActive = (item) => {
     if (item.subItems) {
-      // For parent items, check if the current path starts with its base path
       return item.basePath && location.pathname.startsWith(item.basePath);
     }
-    // For single items, check for an exact match
     return location.pathname === item.href;
   };
   
@@ -166,12 +164,19 @@ const Sidebar = ({ isOpen, setOpen }) => {
       {isOpen && (
         <div onClick={() => setOpen(false)} className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden" aria-hidden="true"></div>
       )}
-      <aside className={`fixed top-0 left-0 z-50 h-screen w-64 border-r bg-white shadow-lg transition-transform duration-300 ease-in-out lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      {/* --- MODIFICATION START --- */}
+      {/* Removed the `lg:translate-x-0` class. The sidebar's position is now only controlled by the isOpen state. */}
+      <aside 
+        className={`fixed top-0 left-0 z-50 h-screen w-64 border-r bg-white shadow-lg transition-transform duration-300 ease-in-out ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+      {/* --- MODIFICATION END --- */}
         <div className="flex h-full flex-col bg-white">
           <div className="flex items-center justify-center p-4 border-b h-[65px]">
             <img src="/src/Pages/admin_logo.png" alt="Vision Data Logo" className="h-auto w-full max-w-[180px]" />
           </div>
-          <nav className="flex-1 px-3 py-4">
+          <nav className="flex-1 px-3 py-4 overflow-y-auto">
             <ul className="space-y-1.5">
               {navItems.map((item) => (
                 <li key={item.label}>
