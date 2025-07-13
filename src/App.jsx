@@ -16,6 +16,7 @@ import AddEmoji from './Pages/Emoji/AddEmoji';
 import AllEmoji from './Pages/Emoji/AllEmoji';
 import AddElection from './Pages/Elections/AddElection';
 import AllElections from './Pages/Elections/AllElections';
+import AllSurveyData from './Pages/SurveyData/AllSurveyData';
 
 const App = () => {
   return (
@@ -40,6 +41,7 @@ const App = () => {
                 <Route path="/allemoji" element={<AllEmoji />} />
                 <Route path="/addelection" element={<AddElection />} />
                 <Route path="/allelection" element={<AllElections />} />
+                <Route path="/allsurveydata" element={<AllSurveyData />} />
 
                 {/* IMPORTANT: Use the path that your Sidebar expects for active styling */}
                 <Route path="/settings/website" element={<WebsiteSettings />} />

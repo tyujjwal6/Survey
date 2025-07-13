@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-// --- FIX 1: Imported the 'Vote' icon for the new Elections section ---
-import { LayoutDashboard, Settings, ChevronDown, Users, Smile, Vote } from 'lucide-react';
+// --- FIX 1: Imported the 'Database' icon for the new Survey Data section ---
+import { LayoutDashboard, Settings, ChevronDown, Users, Smile, Vote, Database } from 'lucide-react';
 
-// --- FIX 2: Added the 'Elections' section to the navigation array ---
+// --- FIX 2: Added the 'Survey Data' section to the navigation array ---
 const navItems = [
   { 
     label: 'Dashboard', 
@@ -35,14 +35,22 @@ const navItems = [
       { label: 'All Emoji', href: '/allemoji' },
     ]
   },
-  // --- NEW ELECTIONS SECTION ADDED HERE ---
   {
     label: 'Elections',
-    icon: Vote, // Using the new Vote icon
-    basePath: '/election', // A logical base path for grouping
+    icon: Vote,
+    basePath: '/election',
     subItems: [
-      { label: 'Add Election', href: '/addelection' }, // Path matches your App.jsx
-      { label: 'All Elections', href: '/allelection' }, // Path matches your App.jsx
+      { label: 'Add Election', href: '/addelection' },
+      { label: 'All Elections', href: '/allelection' },
+    ]
+  },
+  // --- NEW SURVEY DATA SECTION ADDED HERE ---
+  {
+    label: 'Survey Data',
+    icon: Database, // Using the new Database icon
+    basePath: '/survey', // A logical base path for grouping
+    subItems: [
+      { label: 'All Survey Data', href: '/allsurveydata' }, // Path matches your App.jsx
     ]
   }
 ];
@@ -91,18 +99,18 @@ const Sidebar = ({ isOpen, setOpen }) => {
                 <li key={item.label}>
                   {!item.subItems ? (
                     // Top-level link (e.g., Dashboard)
-                    <NavLink to={item.href} className={({ isActive }) => `flex items-center rounded-lg px-4 py-3 text-base font-medium transition-colors ${isActive ? 'bg-blue-600 text-white' : 'text-gray-600 hover:bg-gray-100'}`}>
+                    <NavLink to={item.href} className={({ isActive }) => `flex items-center rounded-lg px-4 py-3 text-base font-medium transition-colors ${isActive ? 'bg-gray-200 text-gray-900' : 'text-gray-600 hover:bg-gray-100'}`}>
                       <item.icon className="h-5 w-5 mr-3" />
                       {item.label}
                     </NavLink>
                   ) : (
-                    // Accordion Section (e.g., General Settings, Users, Emoji)
+                    // Accordion Section
                     <div>
                       <button 
                         onClick={() => toggleSection(item.label)} 
                         className={`flex w-full items-center justify-between rounded-lg px-4 py-3 text-base font-medium transition-colors ${
-                          // Check if any sub-item is active to highlight the parent
-                          item.subItems.some(sub => location.pathname === sub.href) 
+                          // Check if any sub-item is active OR if the section is open to highlight the parent
+                          openSections[item.label] || item.subItems.some(sub => location.pathname === sub.href) 
                             ? 'bg-gray-200 text-gray-900' 
                             : 'text-gray-600 hover:bg-gray-100'
                         }`}
@@ -118,7 +126,7 @@ const Sidebar = ({ isOpen, setOpen }) => {
                           {item.subItems.map((subItem) => (
                             <li key={subItem.label}>
                               {/* Sub-item link */}
-                              <NavLink to={subItem.href} className={({ isActive }) => `flex items-center rounded-lg w-full px-4 py-3 text-sm font-medium transition-colors ${isActive ? 'bg-gray-200 text-gray-900' : 'text-gray-600 hover:bg-gray-100'}`}>
+                              <NavLink to={subItem.href} className={({ isActive }) => `flex items-center rounded-lg w-full px-4 py-3 text-sm font-medium transition-colors ${isActive ? 'text-gray-900 font-semibold' : 'text-gray-600 hover:bg-gray-100'}`}>
                                 {subItem.label}
                               </NavLink>
                             </li>
