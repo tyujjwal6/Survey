@@ -19,6 +19,10 @@ import AllElections from './Pages/Elections/AllElections';
 import AllSurveyData from './Pages/SurveyData/AllSurveyData';
 import AddQuestions from './Pages/Questions/AddQuestions';
 import AllQuestions from './Pages/Questions/AllQuestions';
+import AddOption from './Pages/QuestionOptions/AddOption';
+import AllOptions from './Pages/QuestionOptions/AllOptions';
+import AddZone from './Pages/Zone/AddZone';
+import AllZone from './Pages/Zone/AllZone';
 
 const App = () => {
   return (
@@ -46,6 +50,10 @@ const App = () => {
                 <Route path="/allsurveydata" element={<AllSurveyData />} />
                 <Route path="/addquestions" element={<AddQuestions />} />
                 <Route path="/allquestions" element={<AllQuestions />} />
+                <Route path="/addoption" element={<AddOption />} />
+                <Route path="/alloptions" element={<AllOptions />} />
+                <Route path="/addzone" element={<AddZone />} />
+                <Route path="/allzone" element={<AllZone />} />
 
 
                 {/* IMPORTANT: Use the path that your Sidebar expects for active styling */}

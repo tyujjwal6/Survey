@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-// --- FIX 1: Imported the 'FileText' icon for the new Questions section ---
-import { LayoutDashboard, Settings, ChevronDown, Users, Smile, Vote, Database, FileText } from 'lucide-react';
+// --- FIX 1: Imported the 'MapPin' icon for the new Zone section ---
+import { LayoutDashboard, Settings, ChevronDown, Users, Smile, Vote, Database, FileText, Briefcase, MapPin } from 'lucide-react';
 
-// --- FIX 2: Added the 'Questions' section to the navigation array ---
+// --- FIX 2: Added the 'Zone' section to the navigation array ---
 const navItems = [
   { 
     label: 'Dashboard', 
@@ -52,14 +52,32 @@ const navItems = [
       { label: 'All Survey Data', href: '/allsurveydata' },
     ]
   },
-  // --- NEW QUESTIONS SECTION ADDED HERE ---
   {
     label: 'Questions',
-    icon: FileText, // Using the new FileText icon
-    basePath: '/questions', // A logical base path for grouping
+    icon: FileText,
+    basePath: '/questions',
     subItems: [
-      { label: 'Add Question', href: '/addquestions' }, // Path matches your App.jsx
-      { label: 'All Question', href: '/allquestions' }, // Path matches your App.jsx
+      { label: 'Add Question', href: '/addquestions' },
+      { label: 'All Question', href: '/allquestions' },
+    ]
+  },
+  {
+    label: 'Question Options',
+    icon: Briefcase,
+    basePath: '/options',
+    subItems: [
+      { label: 'Add Option', href: '/addoption' },
+      { label: 'All Options', href: '/alloptions' },
+    ]
+  },
+  // --- NEW ZONE SECTION ADDED HERE ---
+  {
+    label: 'Zone',
+    icon: MapPin, // Using the new MapPin icon
+    basePath: '/zone', // A logical base path
+    subItems: [
+      { label: 'Add Zone', href: '/addzone' },
+      { label: 'All Zone', href: '/allzone' },
     ]
   }
 ];
@@ -109,7 +127,6 @@ const Sidebar = ({ isOpen, setOpen }) => {
                 <li key={item.label}>
                   {!item.subItems ? (
                     // Top-level link (e.g., Dashboard)
-                    // --- FIX 3: Updated active link style to match the image (blue background) ---
                     <NavLink to={item.href} className={({ isActive }) => `flex items-center rounded-lg px-4 py-3 text-base font-medium transition-colors ${isActive ? 'bg-blue-600 text-white' : 'text-gray-600 hover:bg-gray-100'}`}>
                       <item.icon className="h-5 w-5 mr-3" />
                       {item.label}
