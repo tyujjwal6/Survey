@@ -1,6 +1,7 @@
 // src/components/Header.jsx
 
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom'; // 1. Import the Link component
 import { Menu, ChevronDown, User, Settings, LogOut } from 'lucide-react';
 
 const Header = ({ onMenuClick }) => {
@@ -56,9 +57,12 @@ const Header = ({ onMenuClick }) => {
               <a href="#" className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                 <User className="mr-3 h-4 w-4" />Profile
               </a>
-              <a href="#" className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              {/* --- MODIFICATION START --- */}
+              {/* Replaced <a> with <Link> and set the 'to' prop to the correct route */}
+              <Link to="/settings/website" className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                 <Settings className="mr-3 h-4 w-4" />Settings
-              </a>
+              </Link>
+              {/* --- MODIFICATION END --- */}
               <a href="/login" className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                 <LogOut className="mr-3 h-4 w-4" />Logout
               </a>
