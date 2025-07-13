@@ -20,14 +20,13 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 
-
 // DUMMY DATA mimicking the image content and structure
 const zoneData = [
     { id: 205, name: 'TEST ZON', code: '001', status: 'Active', updatedOn: '2025-06-23 18:43:24' },
     { id: 204, name: 'Goreshwar', code: '44', status: 'Active', updatedOn: '2025-06-23 18:21:10' },
 ];
 
-// Reusable Stat Card Component
+// Reusable Stat Card Component styled to perfectly match the image
 const StatCard = ({ title, value, icon: Icon, iconBgClass, textColorClass }) => (
     <Card className="shadow-sm">
         <CardContent className="p-4 flex items-center justify-between">
@@ -72,6 +71,7 @@ const AllZone = () => {
     };
     
     const confirmDelete = () => {
+        // This is where you would call your backend API
         console.log("Deleting zone:", modalData.delete);
         alert(`Zone with ID ${modalData.delete.id} deleted! (simulated)`);
         closeModal('delete');
@@ -82,6 +82,7 @@ const AllZone = () => {
             alert("Please select rows to perform a bulk action.");
             return;
         }
+        // This is where you would process the bulk action
         console.log(`Performing bulk action "${action}" on rows:`, selectedRows);
         alert(`Bulk action "${action}" triggered for selected rows. Check console.`);
     };
