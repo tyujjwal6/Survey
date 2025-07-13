@@ -13,6 +13,7 @@ module.exports = {
                 sm: 'calc(var(--radius) - 4px)'
             },
             colors: {
+                // Existing shadcn/ui colors
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
                 card: {
@@ -62,7 +63,17 @@ module.exports = {
                     'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
                     border: 'hsl(var(--sidebar-border))',
                     ring: 'hsl(var(--sidebar-ring))'
-                }
+                },
+                
+                // --- ADDED CUSTOM BRAND COLORS ---
+                'brand-primary': '#dc5151',
+                'brand-primary-dark': '#c84444',
+                'brand-secondary': '#4a1d1f',
+                'brand-green': '#28a745',
+                'brand-green-dark': '#218838',
+                'brand-orange': '#fd7e14',
+                'action-blue': '#17a2b8',
+                'action-blue-dark': '#138496',
             },
             keyframes: {
                 'accordion-down': {

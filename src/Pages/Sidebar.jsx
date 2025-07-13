@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-// --- FIX 1: Imported the 'Database' icon for the new Survey Data section ---
-import { LayoutDashboard, Settings, ChevronDown, Users, Smile, Vote, Database } from 'lucide-react';
+// --- FIX 1: Imported the 'FileText' icon for the new Questions section ---
+import { LayoutDashboard, Settings, ChevronDown, Users, Smile, Vote, Database, FileText } from 'lucide-react';
 
-// --- FIX 2: Added the 'Survey Data' section to the navigation array ---
+// --- FIX 2: Added the 'Questions' section to the navigation array ---
 const navItems = [
   { 
     label: 'Dashboard', 
@@ -44,13 +44,22 @@ const navItems = [
       { label: 'All Elections', href: '/allelection' },
     ]
   },
-  // --- NEW SURVEY DATA SECTION ADDED HERE ---
   {
     label: 'Survey Data',
-    icon: Database, // Using the new Database icon
-    basePath: '/survey', // A logical base path for grouping
+    icon: Database,
+    basePath: '/survey',
     subItems: [
-      { label: 'All Survey Data', href: '/allsurveydata' }, // Path matches your App.jsx
+      { label: 'All Survey Data', href: '/allsurveydata' },
+    ]
+  },
+  // --- NEW QUESTIONS SECTION ADDED HERE ---
+  {
+    label: 'Questions',
+    icon: FileText, // Using the new FileText icon
+    basePath: '/questions', // A logical base path for grouping
+    subItems: [
+      { label: 'Add Question', href: '/addquestions' }, // Path matches your App.jsx
+      { label: 'All Question', href: '/allquestions' }, // Path matches your App.jsx
     ]
   }
 ];
@@ -63,6 +72,7 @@ const Sidebar = ({ isOpen, setOpen }) => {
   useEffect(() => {
     const newOpenSections = {};
     navItems.forEach(item => {
+      // Make sure item.subItems exists before trying to check it
       const isChildActive = item.subItems?.some(sub => location.pathname === sub.href);
       if (isChildActive) {
         newOpenSections[item.label] = true;
@@ -99,7 +109,8 @@ const Sidebar = ({ isOpen, setOpen }) => {
                 <li key={item.label}>
                   {!item.subItems ? (
                     // Top-level link (e.g., Dashboard)
-                    <NavLink to={item.href} className={({ isActive }) => `flex items-center rounded-lg px-4 py-3 text-base font-medium transition-colors ${isActive ? 'bg-gray-200 text-gray-900' : 'text-gray-600 hover:bg-gray-100'}`}>
+                    // --- FIX 3: Updated active link style to match the image (blue background) ---
+                    <NavLink to={item.href} className={({ isActive }) => `flex items-center rounded-lg px-4 py-3 text-base font-medium transition-colors ${isActive ? 'bg-blue-600 text-white' : 'text-gray-600 hover:bg-gray-100'}`}>
                       <item.icon className="h-5 w-5 mr-3" />
                       {item.label}
                     </NavLink>
