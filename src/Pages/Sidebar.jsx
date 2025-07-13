@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-// --- FIX 1: Imported the 'MapPin' icon for the new Zone section ---
-import { LayoutDashboard, Settings, ChevronDown, Users, Smile, Vote, Database, FileText, Briefcase, MapPin } from 'lucide-react';
+// --- FIX 1: Imported the 'User' icon for the new Candidates section ---
+import { LayoutDashboard, Settings, ChevronDown, Users, Smile, Vote, Database, FileText, Briefcase, MapPin, Blocks, User } from 'lucide-react';
 
-// --- FIX 2: Added the 'Zone' section to the navigation array ---
+// --- FIX 2: Added the 'Candidates' section to the navigation array ---
 const navItems = [
   { 
     label: 'Dashboard', 
@@ -70,14 +70,32 @@ const navItems = [
       { label: 'All Options', href: '/alloptions' },
     ]
   },
-  // --- NEW ZONE SECTION ADDED HERE ---
   {
     label: 'Zone',
-    icon: MapPin, // Using the new MapPin icon
-    basePath: '/zone', // A logical base path
+    icon: MapPin,
+    basePath: '/zone',
     subItems: [
       { label: 'Add Zone', href: '/addzone' },
       { label: 'All Zone', href: '/allzone' },
+    ]
+  },
+  {
+    label: 'Party',
+    icon: Blocks,
+    basePath: '/party',
+    subItems: [
+      { label: 'Add Party', href: '/addparty' },
+      { label: 'All Party', href: '/allparty' },
+    ]
+  },
+  // --- NEW CANDIDATES SECTION ADDED HERE ---
+  {
+    label: 'Candidates',
+    icon: User, // Using the new User icon
+    basePath: '/candidates', // A logical base path
+    subItems: [
+      { label: 'Add Candidate', href: '/addcandidates' },
+      { label: 'All Candidates', href: '/allcandidates' },
     ]
   }
 ];

@@ -23,6 +23,10 @@ import AddOption from './Pages/QuestionOptions/AddOption';
 import AllOptions from './Pages/QuestionOptions/AllOptions';
 import AddZone from './Pages/Zone/AddZone';
 import AllZone from './Pages/Zone/AllZone';
+import AddParty from './Pages/Party/AddParty';
+import AllParty from './Pages/Party/AllParty';
+import AddCandidates from './Pages/Candidates/AddCandidates';
+import AllCandidates from './Pages/Candidates/AllCandidates';
 
 const App = () => {
   return (
@@ -54,6 +58,10 @@ const App = () => {
                 <Route path="/alloptions" element={<AllOptions />} />
                 <Route path="/addzone" element={<AddZone />} />
                 <Route path="/allzone" element={<AllZone />} />
+                <Route path="/addparty" element={<AddParty />} />
+                <Route path="/allparty" element={<AllParty />} />
+                <Route path="/addcandidates" element={<AddCandidates />} />
+                <Route path="/allcandidates" element={<AllCandidates />} />
 
 
                 {/* IMPORTANT: Use the path that your Sidebar expects for active styling */}
