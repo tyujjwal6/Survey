@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Home, ChevronRight, Menu, Send, RotateCcw } from 'lucide-react';
+import adminLogo from '../admin_logo.png'; // Adjust path and extension
 
 // ===================================================================================
 // DUMMY API HANDLER
@@ -209,7 +210,7 @@ const WebsiteSettings = () => {
             <FormRow label="Site Logo">
               <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
                 <div className="p-2 border border-gray-300 rounded-md bg-white">
-                  <img src={logoPreview} alt="Site Logo Preview" className="h-16 w-auto object-contain" />
+                   <img src={adminLogo} alt="Site Logo Preview" className="h-16 w-auto object-contain" />
                 </div>
                 <input type="file" ref={fileInputRef} onChange={handleFileChange} accept="image/*" className="hidden" />
                 <button type="button" onClick={() => fileInputRef.current.click()} className="px-4 py-2 text-sm font-medium text-red-600 bg-white border border-red-500 rounded-md hover:bg-red-50">
