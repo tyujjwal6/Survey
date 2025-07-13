@@ -1,5 +1,3 @@
-// src/layouts/AppLayout.jsx
-
 import React, { useState } from 'react';
 import Header from './Header'; // Adjust path if needed
 import Sidebar from './Sidebar'; // Adjust path if needed

@@ -1,5 +1,3 @@
-// src/components/Sidebar.jsx
-
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { LayoutDashboard, Settings, ChevronDown, Users, Smile, Vote, Database, FileText, Briefcase, MapPin, Blocks, User, Bell, Landmark, Building2 } from 'lucide-react';
