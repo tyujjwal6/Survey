@@ -29,6 +29,8 @@ import AddCandidates from './Pages/Candidates/AddCandidates';
 import AllCandidates from './Pages/Candidates/AllCandidates';
 import AddNotification from './Pages/Notification/AddNotification';
 import AllNotifications from './Pages/Notification/AllNotifications';
+import AddDistricts from './Pages/Districts/AddDistricts';
+import AllDistricts from './Pages/Districts/AllDistricts';
 
 const App = () => {
   return (
@@ -66,6 +68,8 @@ const App = () => {
                 <Route path="/allcandidates" element={<AllCandidates />} />
                 <Route path="/addnotification" element={<AddNotification />} />
                 <Route path="/allnotifications" element={<AllNotifications />} />
+                <Route path="/adddistricts" element={<AddDistricts />} />
+                <Route path="/alldistricts" element={<AllDistricts />} />
 
 
                 {/* IMPORTANT: Use the path that your Sidebar expects for active styling */}

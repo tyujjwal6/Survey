@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-// The Bell icon is already imported
-import { LayoutDashboard, Settings, ChevronDown, Users, Smile, Vote, Database, FileText, Briefcase, MapPin, Blocks, User, Bell } from 'lucide-react';
+// --- FIX 1: Imported the 'Landmark' icon for the Districts section ---
+import { LayoutDashboard, Settings, ChevronDown, Users, Smile, Vote, Database, FileText, Briefcase, MapPin, Blocks, User, Bell, Landmark } from 'lucide-react';
 
+// --- FIX 2: Added the 'Landmark' icon to the 'Districts' navigation item ---
 const navItems = [
   { 
     label: 'Dashboard', 
@@ -98,12 +99,20 @@ const navItems = [
   },
   {
     label: 'Notification',
-    // --- FIX: Uncommented the line below to add the Bell icon ---
     icon: Bell, 
     basePath: '/notification',
     subItems: [
       { label: 'Add Notification', href: '/addnotification' },
       { label: 'All Notifications', href: '/allnotifications' },
+    ]
+  },
+  {
+    label: 'Districts',
+    icon: Landmark, // Added icon for Districts
+    basePath: '/districts',
+    subItems: [
+        { label: 'Add Districts', href: '/adddistricts' },
+        { label: 'All Districts', href: '/alldistricts' },
     ]
   }
 ];
